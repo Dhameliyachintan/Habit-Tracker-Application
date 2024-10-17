@@ -8,32 +8,7 @@ export default function AdminDashboard() {
   useEffect(() => {
     const storedHabits = JSON.parse(localStorage.getItem("habits")) || [];
     setHabits(storedHabits);
-
-    const notificationsShown = localStorage.getItem("notificationsShown");
-
-    if (!notificationsShown) {
-      storedHabits.forEach((habit) => {
-        const message = getMotivationalMessage(habit.progress);
-        toast.info(`${habit.habitName}: ${message}`);
-      });
-
-      localStorage.setItem("notificationsShown", "true"); 
-    }
   }, []); 
-
-  const getMotivationalMessage = (progress) => {
-    if (progress === 100) {
-      return "You're crushing it! Keep up the great work!";
-    } else if (progress >= 75) {
-      return "Almost there, keep going!";
-    } else if (progress >= 50) {
-      return "You're halfway to your goals!";
-    } else if (progress >= 25) {
-      return "Good start! Keep building momentum!";
-    } else {
-      return "Getting started is the hardest part!";
-    }
-  };
 
   const toggleStatus = (index) => {
     const updatedHabits = [...habits];
@@ -50,7 +25,21 @@ export default function AdminDashboard() {
         : "Habit marked as in progress!"
     );
   };
-  
+
+  // Function to get the motivational message based on progress
+  const getMotivationalMessage = (progress) => {
+    if (progress === 100) {
+      return "You're crushing it! Keep up the great work!";
+    } else if (progress >= 75) {
+      return "Almost there, keep going!";
+    } else if (progress >= 50) {
+      return "You're halfway to your goals!";
+    } else if (progress >= 25) {
+      return "Good start! Keep building momentum!";
+    } else {
+      return "Getting started is the hardest part!";
+    }
+  };
 
   return (
     <div className="max-w-6xl mx-auto mt-[91px] p-6 bg-white rounded-lg shadow-md">
@@ -74,7 +63,7 @@ export default function AdminDashboard() {
             {habits.map((habit, index) => (
               <tr key={index}>
                 <td className="border px-4 py-2">{habit.habitName}</td>
-                <td className="border px-4 py-2">{habit.goals}</td>
+                <td className="border px-4 py-2">{habit.goal}</td>
                 <td className="border px-4 py-2">{habit.startDate}</td>
                 <td className="border px-4 py-2">{habit.frequency}</td>
                 <td>

@@ -5,50 +5,76 @@ import { useAuth } from "./form/Authprovider";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const { isLoggedIn, logout } = useAuth();
+  const { login, logout, user } = useAuth();
 
   const handleLogout = () => {
-    if (isLoggedIn) {
-      logout();
-      toast.success("Successfully logged out!");
-      navigate("/login");
-    }
+    logout();
+    navigate("/login");
+    toast.success("Successfully logged out!");
   };
 
   return (
-    <nav className="bg-white shadow-md">
-      <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <Link to="/" className="text-xl font-bold text-black flex items-center">
-            Habit Tracker Application
-          </Link>
-          <div>
-            <Link
-              to="/habitTrackerForm"
-              className="ml-4 px-4 py-2 text-sm font-medium text-black rounded-md hover:bg-black hover:bg-opacity-10"
-            >
-              Habit Tracker Form
-            </Link>
-            {isLoggedIn ? (
-              <button
-                onClick={handleLogout}
-                className="ml-4 px-4 py-2 text-sm font-medium text-black rounded-md hover:bg-black hover:bg-opacity-10"
-              >
-                Logout
-              </button>
-            ) : (
-              <Link
-                to="/login"
-                className="ml-4 px-4 py-2 text-sm font-medium text-black rounded-md hover:bg-black hover:bg-opacity-10"
-              >
-                Login
-              </Link>
+    <header className="bg-white shadow-lg fixed top-0 left-0 w-full z-30">
+      <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+        <h2 className="text-xl font-bold">Habit Tracker Application</h2>
+        <nav>
+          <ul className="flex space-x-6">
+            {user && user.role === "admin" && (
+              <>
+                <li>
+                  <Link
+                    to="/AdminDashboard"
+                    className="text-gray-700 hover:text-gray-900"
+                  >
+                    Admin Dashboard
+                  </Link>
+                </li>
+              </>
             )}
-          </div>
-        </div>
+
+            {user && user.role === "user" && (
+              <>
+                <li>
+                  <Link
+                    to="/habitTrackerForm"
+                    className="text-gray-700 hover:text-gray-900"
+                  >
+                    Habit Tracker Form
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/userDashboard"
+                    className="text-gray-700 hover:text-gray-900"
+                  >
+                    User Dashboard
+                  </Link>
+                </li>
+              </>
+            )}
+
+            {!login ? (
+              <li>
+                <Link to="/login" className="text-gray-700 hover:text-gray-900">
+                  Login
+                </Link>
+              </li>
+            ) : (
+              <li>
+                <button
+                  onClick={handleLogout}
+                  className="text-gray-700 hover:text-gray-900"
+                >
+                  Logout
+                </button>
+              </li>
+            )}
+          </ul>
+        </nav>
       </div>
-    </nav>
+    </header>
   );
 };
 
 export default Navbar;
+

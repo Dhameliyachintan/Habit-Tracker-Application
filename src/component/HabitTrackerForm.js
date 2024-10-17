@@ -62,7 +62,7 @@ export default function HabitTrackerForm() {
     toast.success("Habit added successfully!");
     setSubmittedHabit(newHabit); 
     resetForm();
-    navigate("/AdminDashboard");
+    navigate("/userDashboard");
   };
 
   const resetForm = () => {
