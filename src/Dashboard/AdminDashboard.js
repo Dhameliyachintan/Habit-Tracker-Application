@@ -55,7 +55,7 @@ export default function AdminDashboard() {
               <th className="border px-4 py-2">Status</th>
               <th className="border px-4 py-2">Progress (%)</th>
               <th className="border px-4 py-2">Streak</th>
-              <th className="border px-4 py-2">Motivational Message</th>
+              <th className="border px-4 py-2"> Message</th>
             </tr>
           </thead>
           <tbody>
