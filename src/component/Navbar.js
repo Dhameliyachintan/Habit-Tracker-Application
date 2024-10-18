@@ -19,7 +19,7 @@ const Navbar = () => {
         <h2 className="text-xl font-bold">Habit Tracker Application</h2>
         <nav>
           <ul className="flex space-x-6">
-            {user && user.role === "admin" && (
+            {/* {user && user.role === "admin" && (
               <>
                 <li>
                   <Link
@@ -30,7 +30,7 @@ const Navbar = () => {
                   </Link>
                 </li>
               </>
-            )}
+            )} */}
 
             {user && user.role === "user" && (
               <>
@@ -42,14 +42,14 @@ const Navbar = () => {
                     Habit Tracker Form
                   </Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link
                     to="/userDashboard"
                     className="text-gray-700 hover:text-gray-900"
                   >
                     User Dashboard
                   </Link>
-                </li>
+                </li> */}
               </>
             )}
 
