@@ -26,7 +26,6 @@ export default function AdminDashboard() {
     );
   };
 
-  // Function to get the motivational message based on progress
   const getMotivationalMessage = (progress) => {
     if (progress === 100) {
       return "You're crushing it! Keep up the great work!";
@@ -63,7 +62,7 @@ export default function AdminDashboard() {
             {habits.map((habit, index) => (
               <tr key={index}>
                 <td className="border px-4 py-2">{habit.habitName}</td>
-                <td className="border px-4 py-2">{habit.goal}</td>
+                <td className="border px-4 py-2">{habit.goals}</td>
                 <td className="border px-4 py-2">{habit.startDate}</td>
                 <td className="border px-4 py-2">{habit.frequency}</td>
                 <td>
